@@ -1,0 +1,111 @@
+# IDE & System
+$RECYCLE.BIN/
+.AppleDouble
+.DS_Store
+.LSOverride
+.Trash-*
+.buildpath
+.c9
+.c9revisions
+.directory
+.fuse_hidden*
+.idea
+.nfs*
+.project
+.settings
+.vs
+.vscode
+[Dd]esktop.ini
+[Tt]humbs.db
+
+# Logs
+logs/
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Runtime
+pids/
+*.pid
+*.pid.lock
+*.seed
+
+# Environments
+.python-version
+.env
+.venv
+ENV/
+env/
+env.bak/
+VENV/
+venv/
+venv.bak/
+
+# Distribution & Packaging
+build/
+develop-eggs/
+dist/
+docs/_build/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+pkg/
+sdist/
+var/
+wheels/
+.Python
+.eggs/
+.installed.cfg
+MANIFEST
+*.egg
+*.egg-info/
+
+# Compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Cache & Temporary files
+cache/
+tmp/
+*.tmp
+
+# Test reports & Coverage reports
+htmlcov/
+.hypothesis/
+.tox/
+.cache
+.coverage
+.coverage.*
+coverage.xml
+nosetests.xml
+*.cover
+*,cover
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Django stuff
+.static_storage/
+.media/
+local_settings.py
+
+# Flask stuff
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# PyBuilder
+target/
+
+# Pandoc Installer
+pandoc*
+
+# Not ignore .gitkeep files
+!.gitkeep
