@@ -1,0 +1,55 @@
+dist: xenial
+language: python
+
+python:
+  - 3.5
+  - 3.6
+  - 3.7
+  - nightly
+
+matrix:
+  allow_failures:
+    - python: nightly
+  fast_finish: true
+
+cache: pip
+
+before_install:
+  # Install PyLint and PyTest
+  - travis_retry pip install pylint pytest pytest-cov
+
+  # Fix duplicate lines issues
+  - pylint --generate-rcfile > ~/.pylintrc
+  - sed -i "s/min-similarity-lines=.*/min-similarity-lines=50/g" ~/.pylintrc
+
+  # Fix git tag issues
+  - git describe --tags --long --dirty || sed -i "s/setup_requires = .*/version = '0.0.0',/g" $TRAVIS_BUILD_DIR/setup.py
+
+install:
+  - travis_retry pip install -e .
+
+script:
+  # Run lint
+  - pylint content_hash/*
+  - pylint example.py
+
+  # Run test
+  - pytest --cov=content_hash
+
+after_script:
+  - |
+    if [[ ${TRAVIS_PYTHON_VERSION:0:3} == "3.7" ]]
+    then
+      travis_retry pip install scrutinizer-ocular
+      ocular
+    fi
+
+deploy:
+  provider: pypi
+  skip_cleanup: true
+  skip_existing: true
+  on:
+    tags: true
+  user: $PYPI_USER
+  password: $PYPI_PASSWORD
+  distributions: "sdist bdist_wheel"
