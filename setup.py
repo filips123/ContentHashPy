@@ -21,9 +21,9 @@ setup(
     },
 
     install_requires = [
-        'py-cid',
-        'py-multicodec',
-        'py-multihash',
+        'py-cid>=0.3.0,<0.4.0',
+        'py-multicodec>=0.2.1,<0.3.0',
+        'py-multihash>=0.2.3,<0.3.0',
     ],
 
     extras_require = {
