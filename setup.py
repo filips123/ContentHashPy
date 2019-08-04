@@ -44,7 +44,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
         'Topic :: Internet :: Name Service (DNS)',
-        'Topic :: Scientific/Engineering :: Interface Engine/Protocol Translator'
+        'Topic :: Scientific/Engineering :: Interface Engine/Protocol Translator',
         'Topic :: Security :: Cryptography',
         'Topic :: Software Development :: Libraries',
         'Topic :: Utilities',
