@@ -36,7 +36,7 @@ setup(
     author = 'Filip Š',
     author_email = 'projects@filips.si',
     url = 'https://github.com/filips123/ContentHashPy/',
-    keywords = 'ethereum, ethereum-name-service, ens, eip1557, web3, decentralized',
+    keywords = 'ethereum, ethereum-name-service, ens, eip1577, web3, decentralized',
 
     classifiers = [
         'Development Status :: 5 - Production/Stable',
