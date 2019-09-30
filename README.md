@@ -53,9 +53,8 @@ The following codecs are currently supported:
 - `swarm-ns`
 - `ipfs-ns`
 - `ipns-ns`
-- `onion`
-- `onion3`
-- `zeronet`
+
+Every other codec supported by [`multicodec`][link-multicodec] will be encoded by default in `utf-8`. You can see the full list of the supported codecs [here][link-supported-codecs].
 
 ### Getting Codec
 
@@ -104,7 +103,7 @@ print(chash) # e40101701b20d1de9994b4d039f6548d191eb26786769f580809256b4685ef316
 
 ## Creating Codecs
 
-All supported codec profiles are available in [`content_hash/profiles/__init__.py`][link-profiles-file], in `PROFILES` dictionary. You need to add a new profile there.
+All supported codec profiles are available in [`content_hash/profiles/__init__.py`][link-profiles-file], in `PROFILES` dictionary. You need to add a new profile there. You only need to add a new profile if your codec encoding and decoding are different from `utf-8`.
 
 Each profile must have the same name as the corresponding codec in the `multicodec` library.
 
@@ -148,6 +147,8 @@ This library is licensed under the MIT license. See the [LICENSE][link-license-f
 [link-eip-1577]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1577.md
 [link-ethereum]: https://www.ethereum.org/
 [link-resolvers]: http://docs.ens.domains/en/latest/introduction.html
+[link-multicodec]: https://github.com/multiformats/multicodec/
+[link-supported-codecs]: https://github.com/multiformats/multicodec/blob/master/table.csv
 
 [link-tags]: https://github.com/filips123/ContentHashPy/tags/
 [link-license-file]: https://github.com/filips123/ContentHashPy/blob/master/LICENSE

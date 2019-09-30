@@ -14,5 +14,5 @@ def test_not_decode_nonexistent_codec():
 
 
 def test_not_encode_nonexistent_codec():
-    with pytest.raises(KeyError):
+    with pytest.raises(ValueError):
         content_hash.encode('this-codec-does-not-exist', 'value')

@@ -64,16 +64,14 @@ def get_profile(name):
     :rtype: Profile
     """
 
-    return PROFILES[name]
+    return PROFILES.get(name, PROFILES['default'])
 
 
 PROFILES = {
     'ipfs-ns': Profile(decode='b58_multi_hash', encode='ipfs'),
     'ipns-ns': Profile(decode='b58_multi_hash', encode='ipfs'),
     'swarm-ns': Profile(decode='hex_multi_hash', encode='swarm'),
-    'onion': Profile(decode='utf8', encode='utf8'),
-    'onion3': Profile(decode='utf8', encode='utf8'),
-    'zeronet': Profile(decode='utf8', encode='utf8'),
+    'default': Profile(decode='utf8', encode='utf8'),
 }
 """
 dict: a dict of known profiles
