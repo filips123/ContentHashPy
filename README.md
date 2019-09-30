@@ -95,8 +95,9 @@ It takes a supported codec as a string and a value as a string and returns the c
 ```py
 import content_hash
 
+codec = 'swarm-ns'
 value = 'd1de9994b4d039f6548d191eb26786769f580809256b4685ef316805265ea162'
-chash = content_hash.encode(chash)
+chash = content_hash.encode(codec, value)
 
 print(chash) # e40101701b20d1de9994b4d039f6548d191eb26786769f580809256b4685ef316805265ea162
 ```
