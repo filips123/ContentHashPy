@@ -1,5 +1,6 @@
 from setuptools import setup
 
+
 def readme():
     with open('README.md') as f:
             return f.read()
@@ -21,7 +22,7 @@ setup(
     },
 
     install_requires = [
-        'py-cid>=0.3.0,<0.4.0',
+        'py-multiformats-cid',
         'py-multicodec>=0.2.1,<0.3.0',
         'py-multihash>=0.2.3,<0.3.0',
     ],
@@ -49,6 +50,5 @@ setup(
         'Topic :: Software Development :: Libraries',
         'Topic :: Utilities',
     ],
-
     include_package_data = True,
 )

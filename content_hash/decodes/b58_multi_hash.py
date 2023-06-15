@@ -1,7 +1,7 @@
 """Decode module for B58 multi hash."""
 
-from cid import make_cid
 import multihash
+from multiformats_cid import make_cid
 
 
 def decode(value):

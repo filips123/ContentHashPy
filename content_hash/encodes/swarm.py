@@ -1,7 +1,8 @@
 """Encode module for Swarm."""
 
-from cid import make_cid
 import multihash
+from multiformats_cid import make_cid
+
 
 def encode(value):
     """
