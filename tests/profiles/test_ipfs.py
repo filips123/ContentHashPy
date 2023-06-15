@@ -1,7 +1,7 @@
 import content_hash
 
 
-CODEC = 'ipfs-ns'
+CODEC = 'ipfs'
 DECODED = 'QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4'
 ENCODED = 'e3010170122029f2d17be6139079dc48696d1f582a8530eb9805b561eda517e22a892c7e3f1f'
 

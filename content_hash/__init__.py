@@ -1,7 +1,6 @@
 """Python implementation of EIP 1577 content hash."""
 
-import multihash
-import multicodec
+from multiformats import multicodec
 
 from .profiles import get_profile
 
@@ -15,14 +14,14 @@ def decode(chash):
     :return: the decoded content
     :rtype: str
     """
+    buffer = bytes.fromhex(chash.lstrip('0x'))
 
-    buffer = multihash.from_hex_string(chash.lstrip('0x'))
-
-    codec = multicodec.get_codec(buffer)
-    value = multicodec.remove_prefix(buffer)
-
-    profile = get_profile(codec)
-    return profile.decode(value)
+    codec, value = multicodec.unwrap(buffer)
+    profile = get_profile(codec.name)
+    result = profile.decode(value)
+    if isinstance(result, bytes):
+        result = result.decode()
+    return result
 
 
 def encode(codec, value):
@@ -39,8 +38,8 @@ def encode(codec, value):
     profile = get_profile(codec)
 
     value = profile.encode(value)
-    value = multicodec.add_prefix(codec, value)
-    return multihash.to_hex_string(value)
+    value = multicodec.wrap(codec, value)
+    return value.hex()
 
 
 def get_codec(chash):
@@ -53,5 +52,6 @@ def get_codec(chash):
     :rtype: str
     """
 
-    buffer = multihash.from_hex_string(chash.lstrip('0x'))
-    return multicodec.get_codec(buffer)
+    buffer = bytes.fromhex(chash.lstrip('0x'))
+    codec, _ =  multicodec.unwrap(buffer)
+    return codec.name

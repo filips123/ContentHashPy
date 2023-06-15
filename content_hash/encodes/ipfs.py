@@ -1,6 +1,6 @@
 """Encode module for IPFS."""
 
-import multihash
+import base58check
 from multiformats_cid import make_cid
 
 
@@ -14,5 +14,5 @@ def encode(value):
     :rtype: str
     """
 
-    mhash = multihash.from_b58_string(value)
+    mhash = base58check.b58decode(value)
     return make_cid(1, 'dag-pb', mhash).buffer

@@ -23,8 +23,10 @@ setup(
 
     install_requires = [
         'py-multiformats-cid',
-        'py-multicodec>=0.2.1,<0.3.0',
-        'py-multihash>=0.2.3,<0.3.0',
+        'multiformats',
+        'base58check',  # for b58 encode/decode
+        'pysha3',  # for keccak-256
+        'typing_extensions==4.5.0',  # due to https://github.com/hashberg-io/multiformats/issues/10
     ],
 
     extras_require = {

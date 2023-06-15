@@ -1,6 +1,6 @@
 """Decode module for HEX multi hash."""
 
-import multihash
+from multiformats import multihash
 from multiformats_cid import make_cid
 
 
@@ -15,4 +15,4 @@ def decode(value):
     """
 
     cid = make_cid(value)
-    return multihash.to_hex_string(multihash.decode(cid.multihash).digest)
+    return multihash.unwrap(cid.multihash).hex()

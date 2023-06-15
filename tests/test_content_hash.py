@@ -1,5 +1,6 @@
 import pytest
 
+from multiformats.multicodec.err import MulticodecKeyError
 import content_hash
 
 
@@ -14,5 +15,5 @@ def test_not_decode_nonexistent_codec():
 
 
 def test_not_encode_nonexistent_codec():
-    with pytest.raises(ValueError):
+    with pytest.raises(MulticodecKeyError):
         content_hash.encode('this-codec-does-not-exist', 'value')
