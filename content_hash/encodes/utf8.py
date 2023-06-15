@@ -9,5 +9,4 @@ def encode(value):
     :return: the encoded content
     :rtype: str
     """
-
     return value.encode('utf-8')

@@ -22,7 +22,6 @@ setup(
     },
 
     install_requires = [
-        'py-multiformats-cid',
         'multiformats',
         'base58check',  # for b58 encode/decode
         'pysha3',  # for keccak-256

@@ -1,7 +1,6 @@
 """Decode module for HEX multi hash."""
 
-from multiformats import multihash
-from multiformats_cid import make_cid
+from multiformats import multihash, CID
 
 
 def decode(value):
@@ -13,6 +12,4 @@ def decode(value):
     :return: the decoded content
     :rtype: str
     """
-
-    cid = make_cid(value)
-    return multihash.unwrap(cid.multihash).hex()
+    return multihash.unwrap(CID.decode(value).digest).hex()

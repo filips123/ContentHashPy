@@ -1,7 +1,6 @@
 """Decode module for B58 multi hash."""
 
-from multiformats import multihash
-from multiformats_cid import make_cid
+from multiformats import multihash, CID
 from base58check import b58encode
 
 def decode(value):
@@ -13,6 +12,4 @@ def decode(value):
     :return: the decoded content
     :rtype: str
     """
-
-    cid = make_cid(value)
-    return b58encode(cid.multihash)
+    return b58encode(CID.decode(value).digest)
