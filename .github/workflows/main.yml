@@ -85,7 +85,7 @@ jobs:
         run: pytest --cov=content_hash
 
       - name: Upload coverage
-        if: ${{ matrix.python == "3.11" }}
+        if: matrix.python == "3.11"
         run: ocular
 
   release:
