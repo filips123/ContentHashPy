@@ -86,7 +86,9 @@ jobs:
 
       - name: Upload coverage
         if: matrix.python == '3.11'
-        run: ocular
+        run: |
+          touch .coveragerc
+          ocular
 
   release:
     name: Releasing

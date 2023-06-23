@@ -23,6 +23,6 @@ def get_decode(name):
     decode = CACHE.get(name)
 
     if not decode:
-        decode = CACHE[name] = importlib.import_module(".{0}".format(name), __name__).decode
+        decode = CACHE[name] = importlib.import_module(f".{name}", __name__).decode
 
     return decode

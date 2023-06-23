@@ -23,6 +23,6 @@ def get_encode(name):
     encode = CACHE.get(name)
 
     if not encode:
-        encode = CACHE[name] = importlib.import_module(".{0}".format(name), __name__).encode
+        encode = CACHE[name] = importlib.import_module(f".{name}", __name__).encode
 
     return encode
