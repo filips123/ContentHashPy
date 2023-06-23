@@ -6,8 +6,7 @@ ContentHash for Python
 [![license][icon-license]][link-license]
 [![python][icon-python]][link-python]
 
-[![linux build][icon-travis]][link-travis]
-[![windows build][icon-appveyor]][link-appveyor]
+[![build][icon-build]][link-build]
 [![coverage][icon-coverage]][link-coverage]
 [![quality][icon-quality]][link-quality]
 
@@ -131,16 +130,14 @@ This library is licensed under the MIT license. See the [LICENSE][link-license-f
 [icon-license]: https://img.shields.io/pypi/l/content-hash.svg?style=flat-square&label=license
 [icon-python]: https://img.shields.io/pypi/pyversions/content-hash?style=flat-square&label=python
 
-[icon-travis]: https://img.shields.io/travis/com/filips123/ContentHashPy.svg?style=flat-square&label=linux+build
-[icon-appveyor]: https://img.shields.io/appveyor/ci/filips123/ContentHashPy.svg?style=flat-square&label=windows+build
+[icon-build]: https://img.shields.io/github/actions/workflow/status/filips123/ContentHashPy/main.yml?style=flat-square&label=build
 [icon-coverage]: https://img.shields.io/scrutinizer/coverage/g/filips123/ContentHashPy.svg?style=flat-square&label=coverage
 [icon-quality]: https://img.shields.io/scrutinizer/g/filips123/ContentHashPy.svg?style=flat-square&label=quality
 
 [link-pypi]: https://pypi.org/project/content-hash/
 [link-license]: https://choosealicense.com/licenses/mit/
 [link-python]: https://python.org/
-[link-travis]: https://travis-ci.com/filips123/ContentHashPy/
-[link-appveyor]: https://ci.appveyor.com/project/filips123/ContentHashPy/
+[link-build]: https://github.com/filips123/ContentHashPy/actions
 [link-coverage]: https://scrutinizer-ci.com/g/filips123/ContentHashPy/code-structure/
 [link-quality]: https://scrutinizer-ci.com/g/filips123/ContentHashPy/
 [link-semver]: https://semver.org/

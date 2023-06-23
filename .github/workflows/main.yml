@@ -1,0 +1,127 @@
+name: Test & Release
+
+on:
+  - push
+  - pull_request
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-${{ matrix.python }}-lint-${{ hashFiles('**/setup.py') }}
+          restore-keys: ${{ runner.os }}}-${{ matrix.python }}-lint-
+
+      - name: Configure version
+        run: git describe --tags --long --dirty || sed -i "s/setup_requires = .*/version = '0.0.0',/g" setup.py
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[lint]"
+          pylint --generate-rcfile > ~/.pylintrc
+          sed -i "s/min-similarity-lines=.*/min-similarity-lines=50/g" ~/.pylintrc
+
+      - name: Run lints
+        run: |
+          pylint content_hash/*
+          pylint example.py
+
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-${{ matrix.python }}-test-${{ hashFiles('**/setup.py') }}
+          restore-keys: ${{ runner.os }}}-${{ matrix.python }}-test-
+
+      - name: Configure version
+        run: git describe --tags --long --dirty || sed -i "s/setup_requires = .*/version = '0.0.0',/g" setup.py
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[test]"
+          pip install scrutinizer-ocular
+
+      - name: Run tests
+        run: pytest --cov=content_hash
+
+      - name: Upload coverage
+        if: ${{ matrix.python == "3.11" }}
+        run: ocular
+
+  release:
+    name: Releasing
+    if: startsWith(github.ref, "refs/tags/v")
+    runs-on: ubuntu-latest
+    environment: release
+
+    needs:
+      - lint
+      - test
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-release-${{ hashFiles('**/setup.py') }}
+          restore-keys: ${{ runner.os }}}-release-
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install build
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@release/v1
