@@ -85,12 +85,12 @@ jobs:
         run: pytest --cov=content_hash
 
       - name: Upload coverage
-        if: matrix.python == "3.11"
+        if: matrix.python == '3.11'
         run: ocular
 
   release:
     name: Releasing
-    if: startsWith(github.ref, "refs/tags/v")
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     environment: release
 
