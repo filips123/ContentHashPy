@@ -1,57 +1,43 @@
 """Python implementation of EIP 1577 content hash."""
 
-import multihash
-import multicodec
+from multiformats import multihash, multicodec, CID
 
 from .profiles import get_profile
 
 
-def decode(chash):
+def decode(chash: str) -> str:
     """
     Decode a content hash.
 
-    :param str hash: a hex string containing a content hash
+    :param hash: a hex string containing a content hash
 
     :return: the decoded content
-    :rtype: str
     """
-
-    buffer = multihash.from_hex_string(chash.lstrip('0x'))
-
-    codec = multicodec.get_codec(buffer)
-    value = multicodec.remove_prefix(buffer)
-
-    profile = get_profile(codec)
-    return profile.decode(value)
+    codec, raw_data = multicodec.unwrap(bytes.fromhex(chash.lstrip('0x')))
+    profile = get_profile(codec.name)
+    return profile.decode(raw_data)
 
 
-def encode(codec, value):
+def encode(codec: str, value: str) -> str:
     """
     Encode a content hash.
 
-    :param str codec: a codec of a content hash
-    :param str value: a value of a content hash
+    :param codec: a codec of a content hash
+    :param value: a value of a content hash
 
     :return: the resulting content hash
-    :rtype: str
     """
-
-    profile = get_profile(codec)
-
-    value = profile.encode(value)
-    value = multicodec.add_prefix(codec, value)
-    return multihash.to_hex_string(value)
+    value = get_profile(codec).encode(value)
+    return multicodec.wrap(codec, value).hex()
 
 
-def get_codec(chash):
+def get_codec(chash: str) -> str:
     """
     Extract the codec of a content hash
 
-    :param str hash: a hex string containing a content hash
+    :param hash: a hex string containing a content hash
 
     :return: the extracted codec
-    :rtype: str
     """
-
-    buffer = multihash.from_hex_string(chash.lstrip('0x'))
-    return multicodec.get_codec(buffer)
+    codec, _ = multicodec.unwrap(bytes.fromhex(chash.lstrip('0x')))
+    return codec.name

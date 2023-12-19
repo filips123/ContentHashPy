@@ -29,9 +29,6 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.python }}-lint-${{ hashFiles('**/setup.py') }}
           restore-keys: ${{ runner.os }}}-${{ matrix.python }}-lint-
 
-      - name: Configure version
-        run: git describe --tags --long --dirty || sed -i "s/setup_requires = .*/version = '0.0.0',/g" setup.py
-
       - name: Install Python
         uses: actions/setup-python@v4
         with:
@@ -68,9 +65,6 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.python }}-test-${{ hashFiles('**/setup.py') }}
           restore-keys: ${{ runner.os }}}-${{ matrix.python }}-test-
 
-      - name: Configure version
-        run: git describe --tags --long --dirty || sed -i "s/setup_requires = .*/version = '0.0.0',/g" setup.py
-
       - name: Install Python
         uses: actions/setup-python@v4
         with:
@@ -78,7 +72,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -e ".[test]"
+          pip install '.[tests]'
           pip install scrutinizer-ocular
 
       - name: Run tests
