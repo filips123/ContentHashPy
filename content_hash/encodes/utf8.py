@@ -7,7 +7,6 @@ def encode(value):
     :param bytes value: a decoded content
 
     :return: the encoded content
-    :rtype: str
+    :rtype: bytes
     """
-
     return value.encode('utf-8')

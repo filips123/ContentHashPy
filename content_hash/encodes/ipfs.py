@@ -1,7 +1,8 @@
 """Encode module for IPFS."""
 
-from cid import make_cid
-import multihash
+import base58check
+from multiformats import CID
+from content_hash.utils import raw_cid_value
 
 def encode(value):
     """
@@ -10,8 +11,9 @@ def encode(value):
     :param bytes value: a decoded content
 
     :return: the encoded content
-    :rtype: str
+    :rtype: bytes
     """
 
-    mhash = multihash.from_b58_string(value)
-    return make_cid(1, 'dag-pb', mhash).buffer
+    mhash = base58check.b58decode(value)
+    cid = CID(base='base58btc', codec='dag-pb', version=1, digest=mhash)
+    return raw_cid_value(cid)

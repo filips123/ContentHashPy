@@ -68,9 +68,9 @@ def get_profile(name):
 
 
 PROFILES = {
-    'ipfs-ns': Profile(decode='b58_multi_hash', encode='ipfs'),
-    'ipns-ns': Profile(decode='b58_multi_hash', encode='ipfs'),
-    'swarm-ns': Profile(decode='hex_multi_hash', encode='swarm'),
+    'ipfs': Profile(decode='b58_multi_hash', encode='ipfs'),
+    'ipns': Profile(decode='b58_multi_hash', encode='ipfs'),
+    'swarm': Profile(decode='hex_multi_hash', encode='swarm'),
     'default': Profile(decode='utf8', encode='utf8'),
 }
 """
