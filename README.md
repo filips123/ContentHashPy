@@ -23,7 +23,7 @@ For JavaScript implementation, see [`pldespaigne/content-hash`][link-javascript-
 
 ### Requirements
 
-ContentHash requires Python 3.7 or higher.
+ContentHash requires Python 3.8 or higher.
 
 ### From PyPI
 

@@ -10,7 +10,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 dynamic = ["version"]
 
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -62,7 +62,7 @@ line-length = 110
 disable = ["R0801"]
 
 [tool.mypy]
-python_version = "3.7"
+python_version = "3.8"
 show_column_numbers = true
 show_error_codes = true
 allow_redefinition = true
