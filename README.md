@@ -23,7 +23,7 @@ For JavaScript implementation, see [`pldespaigne/content-hash`][link-javascript-
 
 ### Requirements
 
-ContentHash requires Python 3.5 or higher.
+ContentHash requires Python 3.7 or higher.
 
 ### From PyPI
 
@@ -40,7 +40,7 @@ Alternatively, you can also install it from the source.
 ```bash
 git clone https://github.com/filips123/ContentHashPy.git
 cd ContentHashPy
-python setup.py install
+pip install .
 ```
 
 ## Usage
@@ -49,9 +49,9 @@ python setup.py install
 
 The following codecs are currently supported:
 
-- `swarm-ns`
-- `ipfs-ns`
-- `ipns-ns`
+- `swarm`
+- `ipfs`
+- `ipns`
 
 Every other codec supported by [`multicodec`][link-multicodec] will be encoded by default in `utf-8`. You can see the full list of the supported codecs [here][link-supported-codecs].
 
@@ -142,7 +142,7 @@ This library is licensed under the MIT license. See the [LICENSE][link-license-f
 [link-quality]: https://scrutinizer-ci.com/g/filips123/ContentHashPy/
 [link-semver]: https://semver.org/
 
-[link-eip-1577]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1577.md
+[link-eip-1577]: https://github.com/ethereum/ercs/blob/master/ERCS/erc-1577.md
 [link-ethereum]: https://www.ethereum.org/
 [link-resolvers]: http://docs.ens.domains/en/latest/introduction.html
 [link-multicodec]: https://github.com/multiformats/multicodec/

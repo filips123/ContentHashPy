@@ -1,23 +1,21 @@
-"""Known encoding."""
+"""Known encoding functions."""
 
 import importlib
+import typing
+
+CACHE: typing.Dict[str, typing.Callable[[str], bytes]] = {}
+"""A cache of known encoding functions."""
 
 
-CACHE = {}
-"""dict: a cache of known encoding"""
-
-
-def get_encode(name):
+def get_encode(name: str) -> typing.Callable[[str], bytes]:
     """
     Get encoding function by name.
 
     Encoding should be a function that takes
     a `str` input and returns a `bytes` result.
 
-    :param str name: an encode name
-
-    :return: the resulting encode
-    :rtype: callable
+    :param name: An encode name
+    :return: The resulting encode
     """
 
     encode = CACHE.get(name)

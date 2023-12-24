@@ -1,9 +1,9 @@
 import content_hash
 
 
-CODEC = 'onion'
-DECODED = 'zqktlwi4fecvo6ri'
-ENCODED = 'bc037a716b746c776934666563766f367269'
+CODEC = "onion"
+DECODED = "zqktlwi4fecvo6ri"
+ENCODED = "bc037a716b746c776934666563766f367269"
 
 
 def test_get_codec():

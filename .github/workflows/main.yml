@@ -13,11 +13,6 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        python: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -26,24 +21,29 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-${{ matrix.python }}-lint-${{ hashFiles('**/setup.py') }}
-          restore-keys: ${{ runner.os }}}-${{ matrix.python }}-lint-
+          key: ${{ runner.os }}-lint-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: ${{ runner.os }}}-lint-
 
       - name: Install Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python }}
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
           pip install -e ".[lint]"
-          pylint --generate-rcfile > ~/.pylintrc
-          sed -i "s/min-similarity-lines=.*/min-similarity-lines=50/g" ~/.pylintrc
 
-      - name: Run lints
+      - name: Run lints with pylint
+        if: always()
         run: |
           pylint content_hash/*
           pylint example.py
+
+      - name: Run lints with black
+        if: always()
+        run: |
+          black --check content_hash/*
+          black --check example.py
 
   test:
     name: Testing
@@ -52,7 +52,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
+        python: [ "3.7", "3.8", "3.9", "3.10", "3.11", "3.12" ]
 
     steps:
       - name: Checkout repository
@@ -62,7 +62,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-${{ matrix.python }}-test-${{ hashFiles('**/setup.py') }}
+          key: ${{ runner.os }}-${{ matrix.python }}-test-${{ hashFiles('**/pyproject.toml') }}
           restore-keys: ${{ runner.os }}}-${{ matrix.python }}-test-
 
       - name: Install Python
@@ -72,14 +72,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install '.[tests]'
+          pip install '.[test]'
           pip install scrutinizer-ocular
 
       - name: Run tests
         run: pytest --cov=content_hash
 
       - name: Upload coverage
-        if: matrix.python == '3.11'
+        if: matrix.python == '3.12'
         run: |
           touch .coveragerc
           ocular
@@ -105,13 +105,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-release-${{ hashFiles('**/setup.py') }}
+          key: ${{ runner.os }}-release-${{ hashFiles('**/pyproject.toml') }}
           restore-keys: ${{ runner.os }}}-release-
 
       - name: Install Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: pip install build

@@ -1,16 +1,18 @@
 """Decode module for B58 multi hash."""
 
-from multiformats import CID
+import typing
+
 from base58check import b58encode
+from multiformats import CID
+from multiformats.varint import BytesLike
 
 
-def decode(value: bytes) -> str:
+def decode(value: typing.Union[str, BytesLike]) -> str:
     """
     Decode B58 multi hash.
 
-    :param value: an encoded content
-
-    :return: the decoded content
+    :param value: An encoded content
+    :return: The decoded content
     """
 
-    return b58encode(CID.decode(value).digest).decode('utf-8')
+    return b58encode(CID.decode(value).digest).decode("utf-8")

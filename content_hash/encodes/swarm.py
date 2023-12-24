@@ -1,18 +1,18 @@
 """Encode module for Swarm."""
 
 from multiformats import CID, multihash
-from content_hash.utils import raw_cid_value
 
-def encode(value):
+from ..utils import raw_cid_value
+
+
+def encode(value: str) -> bytes:
     """
     Encode Swarm.
 
-    :param bytes value: a decoded content
-
-    :return: the encoded content
-    :rtype: bytes
+    :param value: A decoded content
+    :return: The encoded content
     """
 
-    mhash = multihash.wrap(bytes.fromhex(value), 'keccak-256')
-    cid = CID(base='base58btc', codec='swarm-manifest', version=1, digest=mhash)
+    mhash = multihash.wrap(bytes.fromhex(value), "keccak-256")
+    cid = CID(base="base58btc", codec="swarm-manifest", version=1, digest=mhash)
     return raw_cid_value(cid)

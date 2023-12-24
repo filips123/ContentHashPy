@@ -1,12 +1,12 @@
 """Decode module for UTF8."""
 
+
 def decode(value: bytes) -> str:
     """
     Decode UTF8.
 
-    :param value: an encoded content
-
-    :return: the decoded content
+    :param value: An encoded content
+    :return: The decoded content
     """
 
-    return value.decode('utf-8')
+    return value.decode("utf-8")

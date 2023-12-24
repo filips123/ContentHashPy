@@ -1,23 +1,21 @@
-"""Known decoding."""
+"""Known decoding functions."""
 
 import importlib
+import typing
+
+CACHE: typing.Dict[str, typing.Callable[[bytes], str]] = {}
+"""A cache of known decoding functions."""
 
 
-CACHE = {}
-"""dict: a cache of known decoding"""
-
-
-def get_decode(name):
+def get_decode(name: str) -> typing.Callable[[bytes], str]:
     """
     Get decoding function by name.
 
     Decoding should be a function that takes
     a `bytes` input and returns a `str` result.
 
-    :param str name: a decode name
-
-    :return: the resulting decode
-    :rtype: callable
+    :param name: A decode name
+    :return: The resulting decode
     """
 
     decode = CACHE.get(name)
